@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>React Music Player</title>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #111827;
+      color: white;
+      font-family: Arial;
+      text-align: center;
+    }
+
+    .container {
+      width: 400px;
+      margin: 100px auto;
+      background: #1f2937;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0px 0px 15px gray;
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    .song {
+      font-size: 28px;
+      margin: 20px 0;
+      color: cyan;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function MusicPlayer() {
+
+  const songs = [
+    "Shape of You 🎵",
+    "Believer 🎵",
+    "Perfect 🎵",
+    "Levitating 🎵",
+    "Faded 🎵"
+  ];
+
+  const [index, setIndex] = React.useState(0);
+
+  function nextSong() {
+
+    if(index === songs.length - 1) {
+      setIndex(0);
+    }
+    else {
+      setIndex(index + 1);
+    }
+  }
+
+  function prevSong() {
+
+    if(index === 0) {
+      setIndex(songs.length - 1);
+    }
+    else {
+      setIndex(index - 1);
+    }
+  }
+
+  return (
+    <div className="container">
+
+      <h1>Music Player 🎧</h1>
+
+      <div className="song">
+        {songs[index]}
+      </div>
+
+      <button onClick={prevSong}>
+        Previous
+      </button>
+
+      <button onClick={nextSong}>
+        Next
+      </button>
+
+    </div>
+  );
+}
+
+ReactDOM.createRoot(
+  document.getElementById("root")
+).render(<MusicPlayer />);
+
+</script>
+
+</body>
+</html>
