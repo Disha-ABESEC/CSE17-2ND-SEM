@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Digital Clock</title>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      color: lime;
+      font-family: Arial;
+      text-align: center;
+    }
+
+    .container {
+      margin-top: 150px;
+    }
+
+    h1 {
+      font-size: 60px;
+    }
+
+    .clock {
+      font-size: 80px;
+      margin-top: 20px;
+      border: 5px solid lime;
+      display: inline-block;
+      padding: 20px 40px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+
+    function Clock() {
+
+      const [time, setTime] = React.useState(new Date());
+
+      React.useEffect(() => {
+
+        setInterval(() => {
+          setTime(new Date());
+        }, 1000);
+
+      }, []);
+
+      return (
+        <div className="container">
+          <h1>Digital Clock ⏰</h1>
+
+          <div className="clock">
+            {time.toLocaleTimeString()}
+          </div>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<Clock />);
+
+  </script>
+
+</body>
+</html>
