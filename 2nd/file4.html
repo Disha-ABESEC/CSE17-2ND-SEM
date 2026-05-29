@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Stopwatch App</title>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0f172a;
+      color: white;
+      font-family: Arial;
+      text-align: center;
+    }
+
+    .container {
+      margin-top: 120px;
+    }
+
+    h1 {
+      font-size: 50px;
+      margin-bottom: 30px;
+    }
+
+    .time {
+      font-size: 70px;
+      margin-bottom: 30px;
+      color: cyan;
+    }
+
+    button {
+      padding: 12px 25px;
+      margin: 10px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function Stopwatch() {
+
+  const [seconds, setSeconds] = React.useState(0);
+  const [running, setRunning] = React.useState(false);
+
+  React.useEffect(() => {
+
+    let timer;
+
+    if(running) {
+
+      timer = setInterval(() => {
+        setSeconds(prev => prev + 1);
+      }, 1000);
+
+    }
+
+    return () => clearInterval(timer);
+
+  }, [running]);
+
+  function startTimer() {
+    setRunning(true);
+  }
+
+  function stopTimer() {
+    setRunning(false);
+  }
+
+  function resetTimer() {
+    setRunning(false);
+    setSeconds(0);
+  }
+
+  return (
+    <div className="container">
+
+      <h1>Stopwatch ⏱️</h1>
+
+      <div className="time">
+        {seconds} sec
+      </div>
+
+      <button onClick={startTimer}>
+        Start
+      </button>
+
+      <button onClick={stopTimer}>
+        Stop
+      </button>
+
+      <button onClick={resetTimer}>
+        Reset
+      </button>
+
+    </div>
+  );
+}
+
+ReactDOM.createRoot(
+  document.getElementById("root")
+).render(<Stopwatch />);
+
+</script>
+
+</body>
+</html>
