@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Result Program</title>
+</head>
+<body>
+
+    <h1>Student Result Program</h1>
+
+    <p id="output"></p>
+
+    <script>
+
+        // Ask number of subjects
+        let n = parseInt(prompt("Enter number of subjects"));
+
+        let total = 0;
+
+        // Input marks
+        for(let i = 1; i <= n; i++)
+        {
+            let marks = parseInt(prompt("Enter marks of Subject " + i));
+            total = total + marks;
+        }
+
+        // Calculate average
+        let average = total / n;
+
+        // Grade calculation
+        let grade = "";
+
+        if(average >= 80)
+        {
+            grade = "A";
+        }
+        else if(average >= 60)
+        {
+            grade = "B";
+        }
+        else if(average >= 40)
+        {
+            grade = "C";
+        }
+        else
+        {
+            grade = "F";
+        }
+
+        // Result
+        let result = (average >= 40) ? "Pass" : "Fail";
+
+        // Display output
+        document.getElementById("output").innerHTML =
+        "<h2>Total Marks = " + total + "</h2>" +
+        "<h2>Average Marks = " + average + "</h2>" +
+        "<h2>Grade = " + grade + "</h2>" +
+        "<h2>Result = " + result + "</h2>";
+
+    </script>
+
+</body>
+</html>
