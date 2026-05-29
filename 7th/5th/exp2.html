@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Employee Management System</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body{
+      background:#f3f3f3;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+    }
+
+    .container{
+      width:500px;
+      background:white;
+      padding:30px;
+      box-shadow:0 0 10px rgba(0,0,0,0.2);
+      text-align:center;
+    }
+
+    h1{
+      margin-bottom:25px;
+      font-size:40px;
+      font-weight:bold;
+    }
+
+    input{
+      width:100%;
+      padding:15px;
+      margin-bottom:15px;
+      border:1px solid #999;
+      font-size:20px;
+      background:#e8edf5;
+    }
+
+    .btn-group{
+      display:flex;
+      flex-wrap:wrap;
+      justify-content:center;
+      gap:15px;
+      margin-top:10px;
+    }
+
+    button{
+      background:blue;
+      color:white;
+      border:none;
+      padding:15px 20px;
+      font-size:20px;
+      cursor:pointer;
+    }
+
+    button:hover{
+      background:darkblue;
+    }
+
+    #output{
+      margin-top:30px;
+      font-size:28px;
+      text-align:left;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Employee Management System</h1>
+
+    <input type="text" id="name" placeholder="Enter Name">
+    <input type="number" id="id" placeholder="Enter ID">
+    <input type="number" id="salary" placeholder="Enter Salary">
+    <input type="text" id="dept" placeholder="Enter Department">
+
+    <div class="btn-group">
+      <button onclick="addEmployee()">Add Employee</button>
+      <button onclick="displayAll()">Display All</button>
+      <button onclick="salaryAbove()">Salary > 50000</button>
+      <button onclick="totalSalary()">Total Salary</button>
+      <button onclick="averageSalary()">Average Salary</button>
+      <button onclick="countDept()">Count Department</button>
+    </div>
+
+    <div id="output"></div>
+  </div>
+
+  <script>
+    let employees = [];
+
+    function addEmployee() {
+      let name = document.getElementById("name").value;
+      let id = document.getElementById("id").value;
+      let salary = Number(document.getElementById("salary").value);
+      let dept = document.getElementById("dept").value;
+
+      let emp = {
+        name,
+        id,
+        salary,
+        dept
+      };
+
+      employees.push(emp);
+
+      document.getElementById("output").innerHTML =
+        `${name} | ${id} | ${salary} | ${dept}`;
+    }
+
+    function displayAll() {
+      let result = "";
+
+      employees.forEach(emp => {
+        result += `${emp.name} | ${emp.id} | ${emp.salary} | ${emp.dept}<br>`;
+      });
+
+      document.getElementById("output").innerHTML = result;
+    }
+
+    function salaryAbove() {
+      let result = "";
+
+      employees
+        .filter(emp => emp.salary > 50000)
+        .forEach(emp => {
+          result += `${emp.name} | ${emp.salary}<br>`;
+        });
+
+      document.getElementById("output").innerHTML = result;
+    }
+
+    function totalSalary() {
+      let total = employees.reduce((sum, emp) => sum + emp.salary, 0);
+
+      document.getElementById("output").innerHTML =
+        `Total Salary = ${total}`;
+    }
+
+    function averageSalary() {
+      if (employees.length === 0) {
+        document.getElementById("output").innerHTML = "No Employees";
+        return;
+      }
+
+      let total = employees.reduce((sum, emp) => sum + emp.salary, 0);
+
+      let avg = total / employees.length;
+
+      document.getElementById("output").innerHTML =
+        `Average Salary = ${avg}`;
+    }
+
+    function countDept() {
+      let departments = {};
+
+      employees.forEach(emp => {
+        if (departments[emp.dept]) {
+          departments[emp.dept]++;
+        } else {
+          departments[emp.dept] = 1;
+        }
+      });
+
+      let result = "";
+
+      for (let dept in departments) {
+        result += `${dept} : ${departments[dept]}<br>`;
+      }
+
+      document.getElementById("output").innerHTML = result;
+    }
+  </script>
+
+</body>
+</html>
