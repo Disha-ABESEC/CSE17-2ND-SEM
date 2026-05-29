@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Typing Speed Test</title>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #1e293b;
+      color: white;
+      font-family: Arial;
+      text-align: center;
+    }
+
+    .container {
+      width: 600px;
+      margin: 80px auto;
+      background: #334155;
+      padding: 30px;
+      border-radius: 10px;
+    }
+
+    .sentence {
+      font-size: 24px;
+      margin-bottom: 20px;
+      color: yellow;
+    }
+
+    textarea {
+      width: 90%;
+      height: 120px;
+      padding: 10px;
+      font-size: 18px;
+      border-radius: 5px;
+      border: none;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 25px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      background: limegreen;
+      color: white;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 28px;
+      color: cyan;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function TypingTest() {
+
+  const text =
+    "React makes building user interfaces easy and fun.";
+
+  const [input, setInput] = React.useState("");
+  const [result, setResult] = React.useState("");
+
+  function checkTyping() {
+
+    let typedWords = input.trim().split(" ").length;
+
+    setResult(
+      "You typed " + typedWords + " words!"
+    );
+  }
+
+  return (
+    <div className="container">
+
+      <h1>Typing Speed Test ⌨️</h1>
+
+      <div className="sentence">
+        {text}
+      </div>
+
+      <textarea
+        placeholder="Start typing here..."
+        value={input}
+        onChange={(e) => setInput(e.target.value)}
+      />
+
+      <br />
+
+      <button onClick={checkTyping}>
+        Check Result
+      </button>
+
+      <div className="result">
+        {result}
+      </div>
+
+    </div>
+  );
+}
+
+ReactDOM.createRoot(
+  document.getElementById("root")
+).render(<TypingTest />);
+
+</script>
+
+</body>
+</html>
