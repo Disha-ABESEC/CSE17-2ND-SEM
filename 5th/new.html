@@ -1,0 +1,130 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Weather App</title>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(to right, #4facfe, #00f2fe);
+      font-family: Arial;
+      text-align: center;
+      color: white;
+    }
+
+    .container {
+      margin-top: 100px;
+    }
+
+    .card {
+      width: 350px;
+      margin: auto;
+      background: rgba(255,255,255,0.2);
+      padding: 30px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+    }
+
+    h1 {
+      margin-bottom: 20px;
+    }
+
+    input {
+      padding: 10px;
+      width: 80%;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 18px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .weather {
+      margin-top: 20px;
+      font-size: 24px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function App() {
+
+  const [city, setCity] = React.useState("");
+  const [weather, setWeather] = React.useState("");
+
+  function checkWeather() {
+
+    if(city === "") {
+      alert("Enter city name");
+      return;
+    }
+
+    const fakeWeather = [
+      "☀️ Sunny",
+      "🌧️ Rainy",
+      "⛅ Cloudy",
+      "❄️ Snowy",
+      "🌩️ Stormy"
+    ];
+
+    let random =
+      fakeWeather[Math.floor(Math.random() * fakeWeather.length)];
+
+    setWeather(random);
+  }
+
+  return (
+    <div className="container">
+
+      <div className="card">
+
+        <h1>Weather App 🌦️</h1>
+
+        <input
+          type="text"
+          placeholder="Enter city name"
+          onChange={(e) => setCity(e.target.value)}
+        />
+
+        <br />
+
+        <button onClick={checkWeather}>
+          Check Weather
+        </button>
+
+        <div className="weather">
+          {weather}
+        </div>
+
+      </div>
+
+    </div>
+  );
+}
+
+ReactDOM.createRoot(
+  document.getElementById("root")
+).render(<App />);
+
+</script>
+
+</body>
+</html>
