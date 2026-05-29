@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>React Dice Roller</title>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #0f172a;
+      color: white;
+      font-family: Arial;
+      text-align: center;
+    }
+
+    .container {
+      margin-top: 120px;
+    }
+
+    h1 {
+      font-size: 50px;
+      margin-bottom: 30px;
+    }
+
+    .dice {
+      font-size: 120px;
+      margin: 30px;
+    }
+
+    button {
+      padding: 12px 30px;
+      font-size: 20px;
+      border: none;
+      border-radius: 8px;
+      background: orange;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function DiceApp() {
+
+  const diceFaces = ["⚀","⚁","⚂","⚃","⚄","⚅"];
+
+  const [dice, setDice] = React.useState("⚀");
+
+  function rollDice() {
+
+    let random =
+      Math.floor(Math.random() * diceFaces.length);
+
+    setDice(diceFaces[random]);
+  }
+
+  return (
+    <div className="container">
+
+      <h1>Dice Roller 🎲</h1>
+
+      <div className="dice">
+        {dice}
+      </div>
+
+      <button onClick={rollDice}>
+        Roll Dice
+      </button>
+
+    </div>
+  );
+}
+
+ReactDOM.createRoot(
+  document.getElementById("root")
+).render(<DiceApp />);
+
+</script>
+
+</body>
+</html>
