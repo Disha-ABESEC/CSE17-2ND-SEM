@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Random Joke Generator</title>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #222;
+      color: white;
+      font-family: Arial;
+      text-align: center;
+    }
+
+    .container {
+      margin-top: 150px;
+    }
+
+    h1 {
+      font-size: 50px;
+    }
+
+    .joke {
+      font-size: 28px;
+      margin: 30px;
+      color: yellow;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 20px;
+      border: none;
+      border-radius: 8px;
+      background: orange;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function App() {
+
+  const jokes = [
+    "Why don’t programmers like nature? It has too many bugs.",
+    "Why was JavaScript sad? Because it didn’t Node how to Express itself.",
+    "Why do coders hate stairs? Because they always take steps.",
+    "404 Joke Not Found.",
+    "Programmer’s wife says: Go to market and buy bread. If eggs are available, buy 12."
+  ];
+
+  const [joke, setJoke] = React.useState(
+    "Click the button for a joke 😂"
+  );
+
+  function generateJoke() {
+
+    let random =
+      jokes[Math.floor(Math.random() * jokes.length)];
+
+    setJoke(random);
+  }
+
+  return (
+    <div className="container">
+
+      <h1>Random Joke Generator 🤣</h1>
+
+      <div className="joke">
+        {joke}
+      </div>
+
+      <button onClick={generateJoke}>
+        New Joke
+      </button>
+
+    </div>
+  );
+}
+
+ReactDOM.createRoot(
+  document.getElementById("root")
+).render(<App />);
+
+</script>
+
+</body>
+</html>
