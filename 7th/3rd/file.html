@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>React App</title>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      margin-top: 100px;
+      background-color: #f2f2f2;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 20px;
+      background-color: blue;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="root"></div>
+
+  <script type="text/babel">
+
+    function App() {
+
+      function showMessage() {
+        alert("React App Running Successfully 🚀");
+      }
+
+      return (
+        <div>
+          <h1>Hello Disha 👋</h1>
+          <h2>This React Code Runs Directly</h2>
+
+          <button onClick={showMessage}>
+            Click Me
+          </button>
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+
+  </script>
+
+</body>
+</html>
