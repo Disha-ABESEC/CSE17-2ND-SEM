@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>React Counter Application</title>
+
+  <style>
+    body{
+      margin:0;
+      background:#020814;
+      font-family:Arial;
+      text-align:center;
+      color:white;
+    }
+
+    .container{
+      width:500px;
+      margin:40px auto;
+      padding:30px;
+      background:#020814;
+    }
+
+    h1{
+      margin-bottom:20px;
+    }
+
+    #count{
+      font-size:40px;
+      margin:20px 0;
+    }
+
+    button{
+      width:260px;
+      padding:12px;
+      margin:40px 0;
+      font-size:28px;
+      background:#19e6e6;
+      border:5px solid green;
+      color:red;
+      cursor:pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>React Counter Application</h1>
+
+    <div id="count">0</div>
+
+    <button onclick="increment()">Increment</button>
+    <br>
+
+    <button onclick="decrement()">Decrement</button>
+    <br>
+
+    <button onclick="reset()">Reset</button>
+  </div>
+
+  <script>
+    let count = 0;
+
+    function updateCount(){
+      document.getElementById("count").innerText = count;
+    }
+
+    function increment(){
+      count++;
+      updateCount();
+    }
+
+    function decrement(){
+      count--;
+      updateCount();
+    }
+
+    function reset(){
+      count = 0;
+      updateCount();
+    }
+  </script>
+
+</body>
+</html>
