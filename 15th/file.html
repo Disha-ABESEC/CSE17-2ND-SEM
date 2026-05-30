@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>React Random Quote Generator</title>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body{
+      margin:0;
+      font-family:Arial;
+      background:#0f172a;
+      color:white;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      height:100vh;
+    }
+
+    .card{
+      width:500px;
+      text-align:center;
+      background:#1e293b;
+      padding:30px;
+      border-radius:12px;
+      box-shadow:0 0 15px rgba(255,255,255,0.2);
+    }
+
+    h1{
+      color:cyan;
+    }
+
+    .quote{
+      font-size:24px;
+      margin:25px 0;
+      min-height:80px;
+    }
+
+    button{
+      padding:12px 25px;
+      font-size:18px;
+      border:none;
+      border-radius:8px;
+      background:#06b6d4;
+      color:white;
+      cursor:pointer;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function QuoteApp(){
+
+  const quotes = [
+    "Success is the sum of small efforts repeated daily.",
+    "Dream big and dare to fail.",
+    "The best way to predict the future is to create it.",
+    "Don't watch the clock; do what it does. Keep going.",
+    "Believe you can and you're halfway there."
+  ];
+
+  const [quote, setQuote] = React.useState(quotes[0]);
+
+  function newQuote(){
+    const random =
+      quotes[Math.floor(Math.random() * quotes.length)];
+    setQuote(random);
+  }
+
+  return(
+    <div className="card">
+
+      <h1>💡 Quote Generator</h1>
+
+      <div className="quote">
+        "{quote}"
+      </div>
+
+      <button onClick={newQuote}>
+        New Quote
+      </button>
+
+    </div>
+  );
+}
+
+ReactDOM.createRoot(
+  document.getElementById("root")
+).render(<QuoteApp />);
+
+</script>
+
+</body>
+</html>
