@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>React Attendance Tracker</title>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body{
+      font-family: Arial;
+      background:#f4f4f4;
+      text-align:center;
+    }
+
+    .container{
+      width:500px;
+      margin:50px auto;
+      background:white;
+      padding:20px;
+      border-radius:10px;
+      box-shadow:0 0 10px gray;
+    }
+
+    input{
+      width:80%;
+      padding:10px;
+      margin:10px;
+      font-size:16px;
+    }
+
+    button{
+      padding:10px 20px;
+      background:blue;
+      color:white;
+      border:none;
+      border-radius:5px;
+      cursor:pointer;
+    }
+
+    .student{
+      display:flex;
+      justify-content:space-between;
+      background:#eee;
+      margin:10px 0;
+      padding:10px;
+      border-radius:5px;
+    }
+
+    .present{
+      color:green;
+      font-weight:bold;
+    }
+
+    .absent{
+      color:red;
+      font-weight:bold;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function AttendanceTracker(){
+
+  const [name,setName] = React.useState("");
+  const [students,setStudents] = React.useState([]);
+
+  function addStudent(){
+
+    if(name===""){
+      alert("Enter student name");
+      return;
+    }
+
+    setStudents([
+      ...students,
+      {
+        name:name,
+        present:false
+      }
+    ]);
+
+    setName("");
+  }
+
+  function toggleAttendance(index){
+
+    const updated=[...students];
+
+    updated[index].present =
+      !updated[index].present;
+
+    setStudents(updated);
+  }
+
+  return(
+    <div className="container">
+
+      <h1>📚 Attendance Tracker</h1>
+
+      <input
+        type="text"
+        placeholder="Enter Student Name"
+        value={name}
+        onChange={(e)=>setName(e.target.value)}
+      />
+
+      <br/>
+
+      <button onClick={addStudent}>
+        Add Student
+      </button>
+
+      {students.map((student,index)=>(
+        <div className="student" key={index}>
+
+          <span>{student.name}</span>
+
+          <span
+            onClick={()=>toggleAttendance(index)}
+            className={
+              student.present
+              ? "present"
+              : "absent"
+            }
+            style={{cursor:"pointer"}}
+          >
+            {student.present
+              ? "Present"
+              : "Absent"}
+          </span>
+
+        </div>
+      ))}
+
+    </div>
+  );
+}
+
+ReactDOM.createRoot(
+document.getElementById("root")
+).render(<AttendanceTracker/>);
+
+</script>
+
+</body>
+</html>
