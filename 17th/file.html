@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>React Rock Paper Scissors</title>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body{
+      font-family: Arial;
+      text-align:center;
+      background:#111827;
+      color:white;
+      margin-top:80px;
+    }
+
+    .container{
+      width:500px;
+      margin:auto;
+      background:#1f2937;
+      padding:30px;
+      border-radius:10px;
+    }
+
+    button{
+      padding:12px 20px;
+      margin:10px;
+      font-size:18px;
+      border:none;
+      border-radius:8px;
+      cursor:pointer;
+    }
+
+    .result{
+      margin-top:20px;
+      font-size:28px;
+      color:cyan;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function Game(){
+
+  const choices = ["Rock ✊","Paper ✋","Scissors ✌️"];
+
+  const [user,setUser] = React.useState("");
+  const [computer,setComputer] = React.useState("");
+  const [result,setResult] = React.useState("");
+
+  function play(choice){
+
+    const random =
+      choices[Math.floor(Math.random()*3)];
+
+    setUser(choice);
+    setComputer(random);
+
+    if(choice === random){
+      setResult("Draw 🤝");
+    }
+    else if(
+      (choice==="Rock ✊" && random==="Scissors ✌️") ||
+      (choice==="Paper ✋" && random==="Rock ✊") ||
+      (choice==="Scissors ✌️" && random==="Paper ✋")
+    ){
+      setResult("You Win 🎉");
+    }
+    else{
+      setResult("Computer Wins 🤖");
+    }
+  }
+
+  return(
+    <div className="container">
+
+      <h1>✊ Rock Paper Scissors ✋</h1>
+
+      <button onClick={()=>play("Rock ✊")}>
+        Rock
+      </button>
+
+      <button onClick={()=>play("Paper ✋")}>
+        Paper
+      </button>
+
+      <button onClick={()=>play("Scissors ✌️")}>
+        Scissors
+      </button>
+
+      <h2>Your Choice: {user}</h2>
+      <h2>Computer: {computer}</h2>
+
+      <div className="result">
+        {result}
+      </div>
+
+    </div>
+  );
+}
+
+ReactDOM.createRoot(
+document.getElementById("root")
+).render(<Game />);
+
+</script>
+
+</body>
+</html>
