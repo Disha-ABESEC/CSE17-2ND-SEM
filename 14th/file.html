@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>React Age Calculator</title>
+
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+  <style>
+    body{
+      font-family: Arial;
+      background:#1a1a1a;
+      color:white;
+      text-align:center;
+      margin-top:100px;
+    }
+
+    .box{
+      width:400px;
+      margin:auto;
+      background:#2d2d2d;
+      padding:30px;
+      border-radius:10px;
+    }
+
+    input{
+      padding:10px;
+      width:80%;
+      font-size:18px;
+      margin:15px;
+    }
+
+    button{
+      padding:10px 20px;
+      font-size:18px;
+      background:blue;
+      color:white;
+      border:none;
+      border-radius:5px;
+      cursor:pointer;
+    }
+
+    h2{
+      color:lime;
+    }
+  </style>
+</head>
+
+<body>
+
+<div id="root"></div>
+
+<script type="text/babel">
+
+function AgeCalculator(){
+
+  const [birthYear,setBirthYear] = React.useState("");
+  const [age,setAge] = React.useState("");
+
+  function calculateAge(){
+
+    const currentYear = new Date().getFullYear();
+
+    if(birthYear === ""){
+      alert("Enter Birth Year");
+      return;
+    }
+
+    setAge(currentYear - birthYear);
+  }
+
+  return(
+    <div className="box">
+
+      <h1>🎂 Age Calculator</h1>
+
+      <input
+        type="number"
+        placeholder="Enter Birth Year"
+        value={birthYear}
+        onChange={(e)=>setBirthYear(e.target.value)}
+      />
+
+      <br />
+
+      <button onClick={calculateAge}>
+        Calculate Age
+      </button>
+
+      <h2>
+        Your Age: {age}
+      </h2>
+
+    </div>
+  );
+}
+
+ReactDOM.createRoot(
+  document.getElementById("root")
+).render(<AgeCalculator />);
+
+</script>
+
+</body>
+</html>
